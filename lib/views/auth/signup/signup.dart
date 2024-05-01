@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
-import 'package:pharmacy/views/all_medicines.dart';
+import 'package:pharmacy/views/all_medicines/all_medicines.dart';
 import 'package:pharmacy/views/auth/signup/bloc/signup_bloc.dart';
 
 class SignUpScreen extends StatelessWidget {

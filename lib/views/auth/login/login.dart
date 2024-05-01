@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
-import 'package:pharmacy/views/all_medicines.dart';
+import 'package:pharmacy/views/add_medicine/add_medicine.dart';
+import 'package:pharmacy/views/all_medicines/all_medicines.dart';
 import 'package:pharmacy/views/auth/login/bloc/login_bloc.dart';
 import 'package:pharmacy/views/auth/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pharmacy/wrapper.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -71,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                   listener: (context, state) {
                    if(state is LoginSuccessState){
                      toast(msg: state.message);
-                     navigateTo(context, page: const AllMedicinesScreen());
+                     navigateTo(context, page: Wrapper());
                    }else if(state is LoginFailureState){
                      toast(msg: state.message);
                    }
