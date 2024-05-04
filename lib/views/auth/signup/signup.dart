@@ -4,6 +4,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/views/all_medicines/all_medicines.dart';
 import 'package:pharmacy/views/auth/signup/bloc/signup_bloc.dart';
+import 'package:pharmacy/wrapper.dart';
 
 class SignUpScreen extends StatelessWidget {
   final bloc = KiwiContainer().resolve<SignupBloc>();
@@ -117,7 +118,7 @@ class SignUpScreen extends StatelessWidget {
                   listener: (context, state) {
                     if(state is SignupSuccessState){
                       toast(msg: state.message);
-                      navigateTo(context, page: const AllMedicinesScreen());
+                      navigateTo(context, page: Wrapper());
                     }else if(state is SignupFailureState){
                       toast(msg: state.message);
                     }

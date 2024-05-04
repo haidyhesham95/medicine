@@ -5,6 +5,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
 import 'package:pharmacy/views/add_medicine/bloc/add_medicine_bloc.dart';
+import 'package:pharmacy/views/all_medicines/bloc/all_medicines_bloc.dart';
 
 class AddMedicineScreens extends StatefulWidget {
   const AddMedicineScreens({super.key});
@@ -132,6 +133,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                       bloc.price.clear();
                       bloc.description.clear();
                     });
+                    KiwiContainer().resolve<AllMedicinesBloc>().add(GetAllMedicinesEvent());
                   }
                 },
                 child: ElevatedButton(
