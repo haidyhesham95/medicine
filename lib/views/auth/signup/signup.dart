@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/views/all_medicines/all_medicines.dart';
@@ -21,15 +22,15 @@ class SignUpScreen extends StatelessWidget {
             key: bloc.formKey,
             child: Column(
               children: [
-                const SizedBox(
-                  height: 100,
+                SizedBox(
+                  height: 100.h,
                 ),
-                const Text(
+                Text(
                   'Sign Up',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(
-                  height: 30,
+                 SizedBox(
+                  height: 30.h,
                 ),
                 TextFormField(
                   controller: bloc.name,
@@ -42,10 +43,10 @@ class SignUpScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       hintText: 'Name',
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15.r))),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 TextFormField(
                   controller: bloc.phone,
@@ -58,10 +59,10 @@ class SignUpScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       hintText: 'Phone Number',
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15.r))),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 TextFormField(
                   controller: bloc.email,
@@ -74,10 +75,10 @@ class SignUpScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       hintText: 'Email',
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15.r))),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 TextFormField(
                   controller: bloc.password,
@@ -90,10 +91,10 @@ class SignUpScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       hintText: 'Password',
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15.r))),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 TextFormField(
                   controller: bloc.confirmPassword,
@@ -108,10 +109,10 @@ class SignUpScreen extends StatelessWidget {
                   decoration: InputDecoration(
                       hintText: 'Confirm Password',
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15))),
+                          borderRadius: BorderRadius.circular(15.r))),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 BlocListener(
                   bloc: bloc,
@@ -135,21 +136,21 @@ class SignUpScreen extends StatelessWidget {
                       },
                       child: const Text('Sign Up')),
                 ),
-                const SizedBox(
-                  height: 16,
+                SizedBox(
+                  height: 16.h,
                 ),
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
                   child: RichText(
-                      text: const TextSpan(children: [
+                      text: TextSpan(children: [
                     TextSpan(
                         text: 'Have Account',
-                        style: TextStyle(color: Colors.black, fontSize: 14)),
+                        style: TextStyle(color: Colors.black, fontSize: 14.sp)),
                     TextSpan(
                         text: ' Login',
-                        style: TextStyle(color: Colors.blue, fontSize: 16)),
+                        style: TextStyle(color: Colors.blue, fontSize: 16.sp)),
                   ])),
                 )
               ],

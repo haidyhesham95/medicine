@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
@@ -34,8 +35,8 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 alignment: Alignment.center,
                 child: bloc.imageFile == null
                     ? Container(
-                        width: 150.0,
-                        height: 150.0,
+                        width: 150.0.w,
+                        height: 150.0.h,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage(Assets.images.addImage.path),
@@ -43,8 +44,8 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                         ),
                       )
                     : Container(
-                        width: 150.0,
-                        height: 150.0,
+                        width: 150.0.w,
+                        height: 150.0.h,
                         decoration: BoxDecoration(
                           image: DecorationImage(
                               image: FileImage(bloc.imageFile!),
@@ -52,8 +53,8 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                         ),
                       ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Center(
                 child: ElevatedButton(
@@ -71,8 +72,8 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                   child: const Text('Upload Image'),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               TextFormField(
                 controller: bloc.name,
@@ -85,10 +86,10 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 decoration: InputDecoration(
                     hintText: 'Name',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.circular(15.r))),
               ),
-              const SizedBox(
-                height: 16,
+               SizedBox(
+                height: 16.h,
               ),
               TextFormField(
                 controller: bloc.description,
@@ -101,10 +102,10 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 decoration: InputDecoration(
                     hintText: 'Description',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.circular(15.r))),
               ),
-              const SizedBox(
-                height: 16,
+              SizedBox(
+                height: 16.h,
               ),
               TextFormField(
                 controller: bloc.price,
@@ -117,10 +118,10 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 decoration: InputDecoration(
                     hintText: 'Price',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
+                        borderRadius: BorderRadius.circular(15.r))),
               ),
-              const SizedBox(
-                height: 16,
+              SizedBox(
+                height: 16.h,
               ),
               BlocListener(
                 bloc:bloc,

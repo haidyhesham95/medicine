@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 
 class PickImage {
@@ -25,18 +26,18 @@ class PickImage {
           ),
           actions: [
             CupertinoButton(
-              child: const Row(
+              child:  Row(
                 children: <Widget>[
-                  Icon(
+                  const Icon(
                     CupertinoIcons.photo_camera_solid,
                   ),
-                  SizedBox(width: 20),
-                  Text('camera'),
+                  SizedBox(width: 20.w),
+                  const Text('camera'),
                 ],
               ),
               onPressed: () async {
                 XFile? pickedFile = await pick.pickImage(
-                    source: ImageSource.camera, maxWidth: 400);
+                    source: ImageSource.camera, maxWidth: 400.w);
                 if (pickedFile != null) {
                   Navigator.pop(context);
                   if (onSubmit != null) onSubmit(File(pickedFile.path),pickedFile.name);
@@ -47,17 +48,17 @@ class PickImage {
               },
             ),
             CupertinoButton(
-              child: const Row(
+              child: Row(
                 children: <Widget>[
-                  Icon(Icons.insert_photo),
-                  SizedBox(width: 20),
-                  Text('gallery'),
+                  const Icon(Icons.insert_photo),
+                  SizedBox(width: 20.w),
+                  const Text('gallery'),
                 ],
               ),
               onPressed: () async {
                 if (isMulti) {
                   List<XFile>? pickedFile =
-                      await pick.pickMultiImage(maxWidth: 400);
+                      await pick.pickMultiImage(maxWidth: 400.w);
                   if (pickedFile != null) {
                     if (onSubmitMulti != null) {
                       List<File> files = [];
@@ -72,7 +73,7 @@ class PickImage {
                   }
                 } else {
                   XFile? pickedFile = await pick.pickImage(
-                      source: ImageSource.gallery, maxWidth: 400);
+                      source: ImageSource.gallery, maxWidth: 400.w);
                   if (pickedFile != null) {
                     Navigator.pop(context);
                     if (onSubmit != null) onSubmit(File(pickedFile.path),pickedFile.name);

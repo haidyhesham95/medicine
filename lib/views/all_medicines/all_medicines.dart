@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/views/all_medicines/bloc/all_medicines_bloc.dart';
 import 'package:pharmacy/views/all_medicines/widgets/medicine_card.dart';
@@ -20,18 +21,18 @@ class AllMedicinesScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 16,),
+            SizedBox(height: 16.h,),
             BlocBuilder(
               bloc: bloc,
               builder: (context, state) {
                 if (state is GetAllMedicinesSuccessState) {
                   return SizedBox(
-                    height: state.medicines.length*170,
+                    height: (state.medicines.length*170).h,
                     child: ListView.separated(
                         itemBuilder: (context, index) =>
                             MedicineCard(medicine: state.medicines[index]),
-                        separatorBuilder: (context, index) => const SizedBox(
-                              height: 16,
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 16.h,
                             ),
                         itemCount: state.medicines.length),
                   );

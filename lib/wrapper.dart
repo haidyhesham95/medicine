@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
 import 'package:pharmacy/views/add_medicine/add_medicine.dart';
@@ -23,7 +24,7 @@ class _WrapperState extends State<Wrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        items: List.generate(icons.length, (index) => BottomNavigationBarItem(icon: SvgPicture.asset(icons[index],width: 30,height: 30,),label: titles[index])),
+        items: List.generate(icons.length, (index) => BottomNavigationBarItem(icon: SvgPicture.asset(icons[index],width: 30.w,height: 30.h,),label: titles[index])),
         currentIndex: widget.currentIndex,
         onTap: (value) {
           setState(() {
