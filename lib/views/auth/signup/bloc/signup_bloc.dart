@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy/core/cache_helper.dart';
 
 part 'signup_event.dart';
 part 'signup_state.dart';
@@ -33,6 +34,10 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
           'email': email.text,
           'uid': user.user!.uid,
         });
+        CacheHelper.saveName(name.text);
+        CacheHelper.saveId(user.user!.uid);
+        CacheHelper.savePhone(phone.text);
+        CacheHelper.saveEmail(email.text);
         emit(SignupSuccessState(message: 'Account Created successfully'));
       } else {
         emit(SignupFailureState(message: "error!"));

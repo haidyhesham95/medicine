@@ -5,13 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pharmacy/core/cache_helper.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final email = TextEditingController(text: 'b@gmail.com');
-  final password = TextEditingController(text: '123456');
+  final email = TextEditingController();
+  final password = TextEditingController();
   final formKey=GlobalKey<FormState>();
   FirebaseAuth auth = FirebaseAuth.instance;
   LoginBloc() : super(LoginInitial()) {
@@ -23,11 +24,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoadingState());
       final user= await FirebaseAuth.instance.signInWithEmailAndPassword(email: event.email, password: event.password);
       await FirebaseFirestore.instance.collection('Users').where('uid',isEqualTo: user.user!.uid).get().then((value) {
-        // PrefUtils.setName(value.docs[0].data()['name']);
-        // PrefUtils.setCity(value.docs[0].data()['city']);
-        // PrefUtils.setEmail(value.docs[0].data()['email']);
-        // PrefUtils.setPhone(value.docs[0].data()['phone']);
-        // PrefUtils.setUid(value.docs[0].data()['uid']);
+        CacheHelper.saveName(value.docs[0].data()['name']);
+        CacheHelper.saveId(value.docs[0].data()['uid']);
+        CacheHelper.savePhone(value.docs[0].data()['phone']);
+        CacheHelper.saveEmail(value.docs[0].data()['email']);
       });
 
       emit(LoginSuccessState(message:'Login success'));

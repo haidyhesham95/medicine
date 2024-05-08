@@ -119,7 +119,7 @@ class SignUpScreen extends StatelessWidget {
                   listener: (context, state) {
                     if(state is SignupSuccessState){
                       toast(msg: state.message);
-                      navigateTo(context, page: Wrapper());
+                      navigateTo(context, page: Wrapper(),withHistory: false);
                     }else if(state is SignupFailureState){
                       toast(msg: state.message);
                     }
@@ -128,10 +128,10 @@ class SignUpScreen extends StatelessWidget {
                       onPressed: () {
                         if (bloc.formKey.currentState!.validate()) {
                           bloc.add(SignupNowEvent(
-                              name: bloc.name.text,
-                              email: bloc.email.text,
+                              name: bloc.name.text.trim(),
+                              email: bloc.email.text.trim(),
                               password: bloc.password.text,
-                              phone: bloc.phone.text));
+                              phone: bloc.phone.text.trim()));
                         }
                       },
                       child: const Text('Sign Up')),

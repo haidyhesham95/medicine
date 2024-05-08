@@ -74,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                   listener: (context, state) {
                    if(state is LoginSuccessState){
                      toast(msg: state.message);
-                     navigateTo(context, page: Wrapper());
+                     navigateTo(context, page: Wrapper(),withHistory: false);
                    }else if(state is LoginFailureState){
                      toast(msg: state.message);
                    }

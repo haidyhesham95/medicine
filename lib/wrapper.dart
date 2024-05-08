@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
 import 'package:pharmacy/views/add_medicine/add_medicine.dart';
 import 'package:pharmacy/views/all_medicines/all_medicines.dart';
+import 'package:pharmacy/views/requests/requests.dart';
 
 class Wrapper extends StatefulWidget {
   Wrapper({super.key,this.currentIndex=0});
@@ -14,11 +15,11 @@ class Wrapper extends StatefulWidget {
 }
 
 class _WrapperState extends State<Wrapper> {
-  final titles=['Medicines','Add'];
+  final titles=['Medicines','Add','Requests'];
 
-  final List<String> icons=[Assets.icons.medicine,Assets.icons.add];
+  final List<String> icons=[Assets.icons.medicine,Assets.icons.add,Assets.icons.requests];
 
-  final List<Widget>screens=[AllMedicinesScreen(),AddMedicineScreens()];
+  final List<Widget>screens=[AllMedicinesScreen(),AddMedicineScreens(),RequestsScreen()];
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy/core/cache_helper.dart';
 import 'package:pharmacy/core/kiwi.dart';
 import 'package:pharmacy/firebase_options.dart';
 import 'package:pharmacy/views/auth/login/login.dart';
@@ -11,6 +12,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await initKiwi();
+  await CacheHelper.init();
   runApp(const MyApp());
 }
 

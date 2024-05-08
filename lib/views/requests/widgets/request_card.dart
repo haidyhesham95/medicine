@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy/views/all_medicines/model/medicine_model.dart';
+import 'package:pharmacy/views/requests/model/request_model.dart';
 import 'package:skeletons/skeletons.dart';
 
-class MedicineCard extends StatelessWidget {
-  final MedicineModel medicine;
-  final VoidCallback onTap;
-  const MedicineCard({super.key, required this.medicine,required this.onTap});
+class RequestCard extends StatelessWidget {
+  final RequestModel request;
+  const RequestCard({super.key, required this.request});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class MedicineCard extends StatelessWidget {
                             image: imageProvider, fit: BoxFit.fill),
                       ),
                     ),
-                    imageUrl: medicine.image,
+                    imageUrl: request.medicine.image,
                     placeholder: (context, url) => SkeletonAvatar(
                       style: SkeletonAvatarStyle(width: 120.w),
                     ),
@@ -58,12 +58,12 @@ class MedicineCard extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      medicine.name,
+                      request.medicine.name,
                       style: TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 20.sp),
                     ),
                     Spacer(),
-                    Text('${medicine.price} \$',
+                    Text('${request.medicine.price} \$',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14.sp,
@@ -71,7 +71,7 @@ class MedicineCard extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  medicine.description,
+                  request.medicine.description,
                   style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 11.sp,
@@ -79,14 +79,7 @@ class MedicineCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                 ),
-                Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: SizedBox(
-                    width: 100.w,
-                      height: 30.h,
-                      child: ElevatedButton(
-                          onPressed: onTap, child: Text('Request'))),
-                )
+                Text('ordered by : ${request.user.name}')
                 // Align(alignment:AlignmentDirectional.bottomEnd,child: ),
               ],
             ),
