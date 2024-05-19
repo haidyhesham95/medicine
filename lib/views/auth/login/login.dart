@@ -10,10 +10,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy/wrapper.dart';
 
 
-class LoginScreen extends StatelessWidget {
-  final bloc = KiwiContainer().resolve<LoginBloc>();
+class LoginScreen extends StatefulWidget {
 
   LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final bloc = KiwiContainer().resolve<LoginBloc>();
 
   @override
   Widget build(BuildContext context) {
