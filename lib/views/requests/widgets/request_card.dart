@@ -63,7 +63,7 @@ class RequestCard extends StatelessWidget {
                           fontWeight: FontWeight.bold, fontSize: 20.sp),
                     ),
                     Spacer(),
-                    Text('${request.medicine.price} \$',
+                    Text('${request.medicine.price} ',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 14.sp,

@@ -88,7 +88,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.r))),
               ),
-               SizedBox(
+              SizedBox(
                 height: 16.h,
               ),
               TextFormField(
@@ -100,7 +100,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                   return null;
                 },
                 decoration: InputDecoration(
-                    hintText: 'Description',
+                    hintText: 'Medicine name',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.r))),
               ),
@@ -111,12 +111,12 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 controller: bloc.price,
                 validator: (value) {
                   if (value == '') {
-                    return 'please enter price';
+                    return 'please enter your number';
                   }
                   return null;
                 },
                 decoration: InputDecoration(
-                    hintText: 'Price',
+                    hintText: 'your number',
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15.r))),
               ),
@@ -124,17 +124,19 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               BlocListener(
-                bloc:bloc,
+                bloc: bloc,
                 listener: (context, state) {
-                  if(state is AddMedicineSuccessState){
+                  if (state is AddMedicineSuccessState) {
                     toast(msg: state.message);
                     setState(() {
-                      bloc.imageFile=null;
+                      bloc.imageFile = null;
                       bloc.name.clear();
                       bloc.price.clear();
                       bloc.description.clear();
                     });
-                    KiwiContainer().resolve<AllMedicinesBloc>().add(GetAllMedicinesEvent());
+                    KiwiContainer()
+                        .resolve<AllMedicinesBloc>()
+                        .add(GetAllMedicinesEvent());
                   }
                 },
                 child: ElevatedButton(

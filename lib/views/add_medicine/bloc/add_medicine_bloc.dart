@@ -15,32 +15,33 @@ class AddMedicineBloc extends Bloc<AddMedicineEvent, AddMedicineState> {
   final name = TextEditingController();
   final price = TextEditingController();
   final description = TextEditingController();
-  String imageName="";
+  String imageName = "";
   PickImage pickImage = PickImage.init;
   File? imageFile;
-  final imageIns=FirebaseStorage.instance.ref();
-  final ins=FirebaseFirestore.instance;
+  final imageIns = FirebaseStorage.instance.ref();
+  final ins = FirebaseFirestore.instance;
 
-  final formKey=GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
   AddMedicineBloc() : super(AddMedicineInitial()) {
     on<AddMedicineNowEvent>(addMedicine);
   }
-  FutureOr<void> addMedicine(AddMedicineNowEvent event, Emitter<AddMedicineState> emit) async{
-    try{
+  FutureOr<void> addMedicine(
+      AddMedicineNowEvent event, Emitter<AddMedicineState> emit) async {
+    try {
       emit(AddMedicineLoadingState());
-      final imageRef=imageIns.child('${DateTime.now()} ${event.imageName}');
+      final imageRef = imageIns.child('${DateTime.now()} ${event.imageName}');
       await imageRef.putFile(event.image);
-      final storageRef=await imageRef.getDownloadURL();
+      final storageRef = await imageRef.getDownloadURL();
       ins.collection('medicines').add({
-        'name':event.name,
-        'price':event.price,
-        'description':event.description,
-        'image':storageRef,
-        'createdAt':DateTime.now().toIso8601String(),
+        'name': event.name,
+        'price': event.price,
+        'description': event.description,
+        'image': storageRef,
+        'createdAt': DateTime.now().toIso8601String(),
       });
-      emit(AddMedicineSuccessState(message: 'Product added successfully'));
-    }on FirebaseException catch(e){
+      emit(AddMedicineSuccessState(message: 'medicine added successfully'));
+    } on FirebaseException catch (e) {
       emit(AddMedicineFailureState(message: e.code));
     }
   }

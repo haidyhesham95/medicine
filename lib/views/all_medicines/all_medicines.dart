@@ -6,6 +6,7 @@ import 'package:pharmacy/core/cache_helper.dart';
 import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/views/all_medicines/bloc/all_medicines_bloc.dart';
 import 'package:pharmacy/views/all_medicines/widgets/medicine_card.dart';
+import 'package:pharmacy/views/all_medicines/widgets/search.dart';
 import 'package:pharmacy/views/requests/bloc/request_bloc.dart';
 
 class AllMedicinesScreen extends StatelessWidget {
@@ -19,7 +20,15 @@ class AllMedicinesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All products'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: Search());
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
+        title: const Text('All Medicine'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -36,14 +45,14 @@ class AllMedicinesScreen extends StatelessWidget {
                     height: (state.medicines.length * 170).h,
                     child: ListView.separated(
                         physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) =>
-                            BlocListener(
+                        itemBuilder: (context, index) => BlocListener(
                               bloc: bloc2,
                               listener: (context, state) {
-                                if(state is RequestMedicineSuccessState){
+                                if (state is RequestMedicineSuccessState) {
                                   toast(msg: state.message);
                                   bloc2.add(GetAllRequestsEvent());
-                                }else if (state is RequestMedicineFailureState) {
+                                } else if (state
+                                    is RequestMedicineFailureState) {
                                   toast(msg: state.message);
                                 }
                               },
