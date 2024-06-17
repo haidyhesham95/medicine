@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pharmacy/views/all_medicines/model/medicine_model.dart';
+import 'package:pharmacy/views/auth/widget/button.dart';
 import 'package:skeletons/skeletons.dart';
 
 class MedicineCard extends StatelessWidget {
@@ -15,7 +16,7 @@ class MedicineCard extends StatelessWidget {
     return Container(
       width: 343.w,
       height: 150.h,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 10.w, ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16.r),
@@ -28,77 +29,85 @@ class MedicineCard extends StatelessWidget {
           // Medicine Image
           SizedBox(
             width: 120.w,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.r),
-              child: CachedNetworkImage(
-                imageBuilder: (context, imageProvider) => Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: imageProvider,
-                      fit: BoxFit.cover,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.w, ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.r),
+                child: CachedNetworkImage(
+                  imageBuilder: (context, imageProvider) => Container(
+
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  imageUrl: medicine.image,
+                  placeholder: (context, url) => SkeletonAvatar(
+                    style: SkeletonAvatarStyle(width: 120.w),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                imageUrl: medicine.image,
-                placeholder: (context, url) => SkeletonAvatar(
-                  style: SkeletonAvatarStyle(width: 120.w),
-                ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
           SizedBox(width: 20.w),
           // Medicine Details
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        medicine.name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.sp,
+            child: Padding(
+              padding:  EdgeInsets.symmetric(vertical: 10.w,),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          medicine.name,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.sp,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    SizedBox(width: 8.w),
-                    // Text(
-                    //   '${medicine.price}',
-                    //   style: TextStyle(
-                    //     fontWeight: FontWeight.bold,
-                    //     fontSize: 14.sp,
-                    //     color: Colors.blue,
-                    //   ),
-                    // ),
-                  ],
-                ),
-                Text(
-                  medicine.description,
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 11.sp,
-                    color: Colors.grey,
+                      SizedBox(width: 8.w),
+                      // Text(
+                      //   '${medicine.price}',
+                      //   style: TextStyle(
+                      //     fontWeight: FontWeight.bold,
+                      //     fontSize: 14.sp,
+                      //     color: Colors.blue,
+                      //   ),
+                      // ),
+                    ],
                   ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 3,
-                ),
-                Align(
-                  alignment: AlignmentDirectional.bottomEnd,
-                  child: SizedBox(
-                    width: 100.w,
-                    height: 30.h,
-                    child: ElevatedButton(
-                      onPressed: onTap,
-                      child: Text('Request'),
+                  SizedBox(height: 10.h,),
+                  Text(
+                    medicine.description,
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      fontSize: 15.sp,
+                      color: Colors.grey.shade600
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: SizedBox(
+                      width: 100.w,
+                      height: 30.h,
+                      child:
+                      buttonWidget(onTap: onTap, text: 'Request', ),
+
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
