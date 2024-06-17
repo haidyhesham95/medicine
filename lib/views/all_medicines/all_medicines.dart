@@ -27,7 +27,7 @@ class AllMedicinesScreen extends StatelessWidget {
             onPressed: () {
               showSearch(context: context, delegate: Search());
             },
-            icon: Icon(Icons.search, color: Color(0xFF4E97C5)),
+            icon: Icon(Icons.search, color: Color(0xFF4E97C5),size: 25,),
           ),
         ],
         title: const Text('All Medicine'),
@@ -85,7 +85,9 @@ class AllMedicinesScreen extends StatelessWidget {
                     return SizedBox(
                       height: MediaQuery.sizeOf(context).height,
                       child: const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: Color(0xFF4E97C5),
+                        ),
                       ),
                     );
                   }

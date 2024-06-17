@@ -53,7 +53,9 @@ class RequestsScreen extends StatelessWidget {
                     return SizedBox(
                       height: MediaQuery.sizeOf(context).height,
                       child: const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: Color(0xFF4E97C5),
+                        ),
                       ),
                     );
                   }
