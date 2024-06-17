@@ -17,11 +17,9 @@ class RequestCard extends StatelessWidget {
        height: 180.h,
         padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, ),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFF4E97C5).withOpacity(0.4),
           borderRadius: BorderRadiusDirectional.circular(16.r),
-          boxShadow: const [
-            BoxShadow(color: Color(0x406b6b6b), spreadRadius: 1, blurRadius: 5)
-          ],
+
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,

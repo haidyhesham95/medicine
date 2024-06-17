@@ -13,8 +13,9 @@ class RequestsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('All requests'),
+        backgroundColor: Color(0xFF4E97C5).withOpacity(0.6),
+
+      title: const Text('All requests'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

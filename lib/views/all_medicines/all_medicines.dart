@@ -21,13 +21,13 @@ class AllMedicinesScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF4E97C5).withOpacity(0.6),
         actions: [
           IconButton(
             onPressed: () {
               showSearch(context: context, delegate: Search());
             },
-            icon: Icon(Icons.search, color: Color(0xFF4E97C5),size: 25,),
+            icon: Icon(Icons.search, color: Colors.black,size: 25,),
           ),
         ],
         title: const Text('All Medicine'),
