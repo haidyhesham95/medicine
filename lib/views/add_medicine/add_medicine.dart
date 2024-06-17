@@ -25,8 +25,10 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Add Medicine'),
+        backgroundColor: Color(0xFF4E97C5).withOpacity(0.6),
+        title: const Text('Add Medicine',style: TextStyle(color: Colors.white,
+         // fontWeight: FontWeight.w700,
+        )),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -37,7 +39,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 30.h,
+                height: 40.h,
               ),
               Container(
                 width: double.infinity,
