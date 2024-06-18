@@ -23,9 +23,9 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4E97C5).withOpacity(0.6),
+        backgroundColor: Color(0xFF4DA8CF).withOpacity(0.9),
         title: const Text('Add Medicine',style: TextStyle(color: Colors.white,
          // fontWeight: FontWeight.w700,
         )),
@@ -47,7 +47,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 decoration:  BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    border: Border.all(color: Color(0xFF4E97C5),width: 1.5),
+                    border: Border.all(color: Color(0xFF4DA8CF),width: 1.5),
                     boxShadow: [
                       BoxShadow(
                         offset: const Offset(0, 4),
@@ -73,7 +73,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                         },
                       );
                       },
-                    child:bloc.imageFile == null ?Center(child: Image.asset(Assets.images.addImage.path,fit:BoxFit.cover,color: Color(0xFF4E97C5),height: 130,width: 130,))
+                    child:bloc.imageFile == null ?Center(child: Image.asset(Assets.images.addImage.path,fit:BoxFit.cover,color: Color(0xFF4DA8CF),height: 130,width: 130,))
 
                     : Center(child: Image.file(bloc.imageFile!,
                         fit: BoxFit.cover)),
@@ -85,10 +85,9 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 70.h,
               ),
               textField(
-                context,
-                'Name',
-                bloc.name,
-                (value) {
+              hintText:   'Name',
+              controller:   bloc.name,
+              validator:   (value) {
                   if (value == '') {
                     return 'please enter your name';
                   }
@@ -99,10 +98,9 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-                context,
-                'Medicine Name',
-                bloc.description,
-                (value) {
+              hintText:   'Medicine Name',
+              controller:   bloc.description,
+              validator:   (value) {
                   if (value == '') {
                     return 'please enter description';
                   }
@@ -113,10 +111,10 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-                context,
-                'Your Number',
-                bloc.price,
-                (value) {
+
+               hintText: 'Your Number',
+               controller:  bloc.price,
+               validator:  (value) {
                   if (value == '') {
                     return 'please enter your number';
                   }

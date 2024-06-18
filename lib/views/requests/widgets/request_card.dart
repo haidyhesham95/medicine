@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pharmacy/views/all_medicines/model/medicine_model.dart';
 import 'package:pharmacy/views/requests/model/request_model.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -12,23 +11,23 @@ class RequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-       height: 180.h,
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, ),
-        decoration: BoxDecoration(
-          color: Color(0xFF4E97C5).withOpacity(0.4),
-          borderRadius: BorderRadiusDirectional.circular(16.r),
-
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            buildImage(),
-            SizedBox(width: 20.w),
-            Expanded(child: buildDetailsColumn()),
-          ],
-        ),
+    return Container(
+     height: 180.h,
+      padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadiusDirectional.circular(16.r),
+        boxShadow: const [
+          BoxShadow(color: Color(0x406b6b6b), spreadRadius: 1, blurRadius: 5),
+        ],
+            ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          buildImage(),
+          SizedBox(width: 20.w),
+          Expanded(child: buildDetailsColumn()),
+        ],
       ),
     );
   }
@@ -82,7 +81,7 @@ class RequestCard extends StatelessWidget {
           SizedBox(height: 3,),
 
           buildText(
-            'Price : ${request.medicine.price}',
+            '${request.medicine.price}',
             fontWeight: FontWeight.bold,
             fontSize: 14.sp,
             color: Colors.black45,
