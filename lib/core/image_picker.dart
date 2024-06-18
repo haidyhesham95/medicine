@@ -20,8 +20,11 @@ class PickImage {
       context: context,
       builder: (context) {
         return CupertinoActionSheet(
+
           cancelButton: CupertinoButton(
-            child: const Text('cancel'),
+            borderRadius: BorderRadius.circular(15.r),
+            color: Color(0xFF4E97C5),
+            child:  Text('cancel',style: TextStyle(fontSize: 18.sp,color: Colors.white),),
             onPressed: () => Navigator.of(context).pop(),
           ),
           actions: [
@@ -30,9 +33,13 @@ class PickImage {
                 children: <Widget>[
                   const Icon(
                     CupertinoIcons.photo_camera_solid,
+                    color: Color(0xFF4E97C5),
                   ),
                   SizedBox(width: 20.w),
-                  const Text('camera'),
+                  const Text('camera',style: TextStyle(
+                    color: Color(0xFF4E97C5),
+
+                  ),),
                 ],
               ),
               onPressed: () async {
@@ -50,9 +57,10 @@ class PickImage {
             CupertinoButton(
               child: Row(
                 children: <Widget>[
-                  const Icon(Icons.insert_photo),
+                  const Icon(Icons.insert_photo,color: Color(0xFF4E97C5)),
                   SizedBox(width: 20.w),
-                  const Text('gallery'),
+                  const Text('gallery',
+                  style: TextStyle(color: Color(0xFF4E97C5)),),
                 ],
               ),
               onPressed: () async {

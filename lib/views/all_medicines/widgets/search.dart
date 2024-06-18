@@ -21,7 +21,7 @@ class Search extends SearchDelegate {
             query = "";
             showSuggestions(context);
           },
-          icon: Icon(Icons.close))
+          icon: Icon(Icons.close,color: Colors.red.shade800,))
     ];
   }
 
@@ -31,7 +31,7 @@ class Search extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: Icon(Icons.arrow_back),
+      icon: Icon(Icons.arrow_back,color: Color(0xFF4E97C5),),
     );
   }
 
@@ -42,58 +42,63 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return BlocBuilder(
-      bloc: bloc,
-      builder: (context, state) {
-        if (state is GetAllMedicinesSuccessState) {
-          final filteredMedicines = query.isEmpty
-              ? state.medicines
-              : state.medicines.where((medicine) {
-                  return medicine.name
-                      .toLowerCase()
-                      .contains(query.toLowerCase());
-                }).toList();
-
-          if (filteredMedicines.isEmpty) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: BlocBuilder(
+        bloc: bloc,
+        builder: (context, state) {
+          if (state is GetAllMedicinesSuccessState) {
+            final filteredMedicines = query.isEmpty
+                ? state.medicines
+                : state.medicines.where((medicine) {
+                    return medicine.name
+                        .toLowerCase()
+                        .contains(query.toLowerCase());
+                  }).toList();
+      
+            if (filteredMedicines.isEmpty) {
+              return Center(
+                child: Text('No medicine found.',style: TextStyle(color: Color(0xFF4E97C5),fontSize: 20.sp,fontWeight: FontWeight.bold),),
+              );
+            }
+      
+            return ListView.separated(
+              padding: EdgeInsets.all(16.h),
+              itemCount: filteredMedicines.length,
+              itemBuilder: (context, index) => BlocListener(
+                bloc: bloc2,
+                listener: (context, state) {
+                  if (state is RequestMedicineSuccessState) {
+                    toast(msg: state.message);
+                    bloc2.add(GetAllRequestsEvent());
+                  } else if (state is RequestMedicineFailureState) {
+                    toast(msg: state.message);
+                  }
+                },
+                child: MedicineCard(
+                  medicine: filteredMedicines[index],
+                  onTap: () {
+                    bloc2.add(RequestMedicineEvent(
+                        medicineId: filteredMedicines[index].id,
+                        userId: CacheHelper.getId()));
+                  },
+                ),
+              ),
+              separatorBuilder: (context, index) => SizedBox(height: 20.h),
+            );
+          } else if (state is GetAllMedicinesFailureState) {
             return Center(
-              child: Text('No medicine found'),
+              child: Text(state.message),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(
+                color: Color(0xFF4E97C5),
+              ),
             );
           }
-
-          return ListView.separated(
-            padding: EdgeInsets.all(16.h),
-            itemCount: filteredMedicines.length,
-            itemBuilder: (context, index) => BlocListener(
-              bloc: bloc2,
-              listener: (context, state) {
-                if (state is RequestMedicineSuccessState) {
-                  toast(msg: state.message);
-                  bloc2.add(GetAllRequestsEvent());
-                } else if (state is RequestMedicineFailureState) {
-                  toast(msg: state.message);
-                }
-              },
-              child: MedicineCard(
-                medicine: filteredMedicines[index],
-                onTap: () {
-                  bloc2.add(RequestMedicineEvent(
-                      medicineId: filteredMedicines[index].id,
-                      userId: CacheHelper.getId()));
-                },
-              ),
-            ),
-            separatorBuilder: (context, index) => SizedBox(height: 16.h),
-          );
-        } else if (state is GetAllMedicinesFailureState) {
-          return Center(
-            child: Text(state.message),
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+        },
+      ),
     );
   }
 }

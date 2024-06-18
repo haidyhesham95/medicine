@@ -22,14 +22,21 @@ class SignUpScreen extends StatelessWidget {
             key: bloc.formKey,
             child: Column(
               children: [
-                SizedBox(
-                  height: 100.h,
+                // SizedBox(
+                //   height: 50.h,
+                // ),
+                Image.asset(
+                  'assets/images/LO.png',
+                  height: 100,
                 ),
                 Text(
                   'Sign Up',
-                  style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 3, 95, 171)),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 30.h,
                 ),
                 TextFormField(
@@ -42,6 +49,10 @@ class SignUpScreen extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                       hintText: 'Name',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
@@ -58,6 +69,10 @@ class SignUpScreen extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                       hintText: 'Phone Number',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
@@ -74,6 +89,10 @@ class SignUpScreen extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                       hintText: 'Email',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
@@ -90,6 +109,10 @@ class SignUpScreen extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                       hintText: 'Password',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
@@ -108,6 +131,10 @@ class SignUpScreen extends StatelessWidget {
                   },
                   decoration: InputDecoration(
                       hintText: 'Confirm Password',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
@@ -117,10 +144,10 @@ class SignUpScreen extends StatelessWidget {
                 BlocListener(
                   bloc: bloc,
                   listener: (context, state) {
-                    if(state is SignupSuccessState){
+                    if (state is SignupSuccessState) {
                       toast(msg: state.message);
-                      navigateTo(context, page: Wrapper(),withHistory: false);
-                    }else if(state is SignupFailureState){
+                      navigateTo(context, page: Wrapper(), withHistory: false);
+                    } else if (state is SignupFailureState) {
                       toast(msg: state.message);
                     }
                   },
@@ -134,7 +161,10 @@ class SignUpScreen extends StatelessWidget {
                               phone: bloc.phone.text.trim()));
                         }
                       },
-                      child: const Text('Sign Up')),
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(color: Colors.blue),
+                      )),
                 ),
                 SizedBox(
                   height: 16.h,

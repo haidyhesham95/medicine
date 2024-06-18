@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +6,9 @@ import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
 import 'package:pharmacy/views/add_medicine/bloc/add_medicine_bloc.dart';
 import 'package:pharmacy/views/all_medicines/bloc/all_medicines_bloc.dart';
+import 'package:pharmacy/views/auth/widget/button.dart';
+
+import '../auth/widget/text_field.dart';
 
 class AddMedicineScreens extends StatefulWidget {
   const AddMedicineScreens({super.key});
@@ -21,8 +23,12 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Add Medicine'),
+        backgroundColor: Color(0xFF4E97C5).withOpacity(0.6),
+        title: const Text('Add Medicine',style: TextStyle(color: Colors.white,
+         // fontWeight: FontWeight.w700,
+        )),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -30,98 +36,95 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
         child: Form(
           key: bloc.formKey,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(
-                alignment: Alignment.center,
-                child: bloc.imageFile == null
-                    ? Container(
-                        width: 150.0.w,
-                        height: 150.0.h,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(Assets.images.addImage.path),
-                              fit: BoxFit.cover),
-                        ),
-                      )
-                    : Container(
-                        width: 150.0.w,
-                        height: 150.0.h,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: FileImage(bloc.imageFile!),
-                              fit: BoxFit.cover),
-                        ),
-                      ),
-              ),
               SizedBox(
-                height: 20.h,
+                height: 40.h,
               ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    bloc.pickImage.imagePickerDialog(
-                      context: context,
-                      onSubmit: (file, name) {
-                        setState(() {
-                          bloc.imageFile = file;
-                          bloc.imageName = name;
-                        });
+              Container(
+                width: double.infinity,
+                height: 150,
+                decoration:  BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    border: Border.all(color: Color(0xFF4E97C5),width: 1.5),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(0, 4),
+                        blurRadius: 4,
+                        spreadRadius: 0,
+                        color: Colors.black.withOpacity(0.15),
+                      )
+                    ]
+                ),
+
+
+                child:
+
+                InkWell(
+                    onTap: () {
+                      bloc.pickImage.imagePickerDialog(
+                        context: context,
+                        onSubmit: (file, name) {
+                          setState(() {
+                            bloc.imageFile = file;
+                            bloc.imageName = name;
+                          });
+                        },
+                      );
                       },
-                    );
-                  },
-                  child: const Text('Upload Image'),
+                    child:bloc.imageFile == null ?Center(child: Image.asset(Assets.images.addImage.path,fit:BoxFit.cover,color: Color(0xFF4E97C5),height: 130,width: 130,))
+
+                    : Center(child: Image.file(bloc.imageFile!,
+                        fit: BoxFit.cover)),
+
                 ),
               ),
+
               SizedBox(
-                height: 20.h,
+                height: 70.h,
               ),
-              TextFormField(
-                controller: bloc.name,
-                validator: (value) {
+              textField(
+                context,
+                'Name',
+                bloc.name,
+                (value) {
                   if (value == '') {
                     return 'please enter your name';
                   }
                   return null;
                 },
-                decoration: InputDecoration(
-                    hintText: 'Name',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r))),
               ),
               SizedBox(
                 height: 16.h,
               ),
-              TextFormField(
-                controller: bloc.description,
-                validator: (value) {
+              textField(
+                context,
+                'Medicine Name',
+                bloc.description,
+                (value) {
                   if (value == '') {
                     return 'please enter description';
                   }
                   return null;
                 },
-                decoration: InputDecoration(
-                    hintText: 'Medicine name',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r))),
               ),
               SizedBox(
                 height: 16.h,
               ),
-              TextFormField(
-                controller: bloc.price,
-                validator: (value) {
+              textField(
+                context,
+                'Your Number',
+                bloc.price,
+                (value) {
                   if (value == '') {
                     return 'please enter your number';
                   }
                   return null;
                 },
-                decoration: InputDecoration(
-                    hintText: 'your number',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r))),
               ),
               SizedBox(
-                height: 16.h,
+                height: 50.h,
               ),
               BlocListener(
                 bloc: bloc,
@@ -139,22 +142,26 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                         .add(GetAllMedicinesEvent());
                   }
                 },
-                child: ElevatedButton(
-                    onPressed: () {
-                      if (bloc.formKey.currentState!.validate()) {
-                        if (bloc.imageFile == null) {
-                          toast(msg: 'choose image');
-                        } else {
-                          bloc.add(AddMedicineNowEvent(
-                              name: bloc.name.text,
-                              price: bloc.price.text,
-                              description: bloc.description.text,
-                              image: bloc.imageFile!,
-                              imageName: bloc.imageName));
-                        }
-                      }
-                    },
-                    child: const Text('Save')),
+                child:  SizedBox(
+                    width: 343.w,
+                    height: 50.h,
+                    child: buttonWidget(
+                        onTap:  () {
+                            if (bloc.formKey.currentState!.validate()) {
+                              if (bloc.imageFile == null) {
+                                toast(msg: 'choose image');
+                              } else {
+                                bloc.add(AddMedicineNowEvent(
+                                    name: bloc.name.text,
+                                    price: bloc.price.text,
+                                    description: bloc.description.text,
+                                    image: bloc.imageFile!,
+                                    imageName: bloc.imageName));
+                              }
+                            }
+                          },text: 'Save',
+                        fontSize: 18.sp,radius: 15.0.r),
+                  ),
               )
             ],
           ),

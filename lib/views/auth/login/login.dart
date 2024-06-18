@@ -9,9 +9,7 @@ import 'package:pharmacy/views/auth/signup/signup.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy/wrapper.dart';
 
-
 class LoginScreen extends StatefulWidget {
-
   LoginScreen({super.key});
 
   @override
@@ -25,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // backgroundColor: Color.fromARGB(255, 244, 250, 255),
         body: SingleChildScrollView(
           padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
           child: Form(
@@ -32,27 +31,37 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                 SizedBox(
-                  height: 100.h,
+                SizedBox(
+                  height: 50.h,
                 ),
-                 Text(
+                Image.asset(
+                  'assets/images/LO.png',
+                  height: 200,
+                ),
+                Text(
                   'Login',
-                  style: TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+                  style:
+                      TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 30.h,
                 ),
                 TextFormField(
                   controller: bloc.email,
                   validator: (value) {
-                    if(value==''){
+                    if (value == '') {
                       return 'please enter email address';
                     }
                     return null;
                   },
                   decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       hintText: 'Email',
                       border: OutlineInputBorder(
+                          // borderSide: BorderSide(color: Colors.blue),
                           borderRadius: BorderRadius.circular(15.r))),
                 ),
                 SizedBox(
@@ -62,12 +71,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: bloc.password,
                   obscureText: true,
                   validator: (value) {
-                    if(value==''){
+                    if (value == '') {
                       return 'please enter password';
                     }
                     return null;
                   },
                   decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue),
+                        borderRadius: BorderRadius.circular(15.r),
+                      ),
                       hintText: 'Password',
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.r))),
@@ -76,14 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 16.h,
                 ),
                 BlocListener(
-                  bloc:bloc,
+                  bloc: bloc,
                   listener: (context, state) {
-                   if(state is LoginSuccessState){
-                     toast(msg: state.message);
-                     navigateTo(context, page: Wrapper(),withHistory: false);
-                   }else if(state is LoginFailureState){
-                     toast(msg: state.message);
-                   }
+                    if (state is LoginSuccessState) {
+                      toast(msg: state.message);
+                      navigateTo(context, page: Wrapper(), withHistory: false);
+                    } else if (state is LoginFailureState) {
+                      toast(msg: state.message);
+                    }
                   },
                   child: ElevatedButton(
                       onPressed: () {
@@ -93,14 +106,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               password: bloc.password.text));
                         }
                       },
-                      child: const Text('Login')),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.blue),
+                      )),
                 ),
                 SizedBox(
                   height: 16.h,
                 ),
                 InkWell(
                   onTap: () {
-                    navigateTo(context, page:  SignUpScreen());
+                    navigateTo(context, page: SignUpScreen());
                   },
                   child: RichText(
                       text: TextSpan(children: [

@@ -25,7 +25,16 @@ class _WrapperState extends State<Wrapper> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        items: List.generate(icons.length, (index) => BottomNavigationBarItem(icon: SvgPicture.asset(icons[index],width: 30.w,height: 30.h,),label: titles[index])),
+        backgroundColor: Colors.white,
+
+        showUnselectedLabels: true,
+        unselectedLabelStyle: const TextStyle(color: Colors.white),
+        selectedLabelStyle: const TextStyle(color: Color(0xFF4E97C5)),
+
+        landscapeLayout: BottomNavigationBarLandscapeLayout.centered,
+        unselectedItemColor: Color(0xFF4E97C5).withOpacity(0.5),
+        fixedColor:  Color(0xFF4E97C5),
+        items: List.generate(icons.length, (index) => BottomNavigationBarItem(icon: SvgPicture.asset(icons[index],width: 30.w,height: 30.h,color:Color(0xFF4E97C5) ,),label: titles[index])),
         currentIndex: widget.currentIndex,
         onTap: (value) {
           setState(() {
