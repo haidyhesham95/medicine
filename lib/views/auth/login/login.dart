@@ -26,129 +26,159 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF4DA8CF),
       body: Stack(
         children: [
           SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                    height: 300.h > 300 ? 300.h : 300,
-                    width: double.infinity,
-                    child: Image.asset(
-                      'assets/images/login.jpg',
-                      fit: BoxFit.fill,
-                    )),
+                  height: 150.h,
+                ),
+                Text(
+                  'Welcome Back..',
+                  style: TextStyle(
+                    fontSize: 40.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'courgette',
+                  ),
+                ),
+                SizedBox(
+                  height: 100.h,
+                ),
+                // SizedBox(
+                //     height: 300.h > 300 ? 300.h : 300,
+                //     width: double.infinity,
+                //     child: Image.asset(
+                //       'assets/images/login.jpg',
+                //       fit: BoxFit.fill,
+                //     )),
                 Form(
                   key: bloc.formKey,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 30.h,),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        widthFactor: 4.5,
-
-                        child: Text(
-                          'Login',
-                          style:
-                          TextStyle(fontSize: 30.sp, fontWeight: FontWeight.bold),
+                  child: SizedBox(
+                    child: Container(
+                      height: 625.h,
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 244, 250, 255),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(0),
+                          topLeft: Radius.circular(70),
+                          topRight: Radius.circular(70),
+                          bottomRight: Radius.circular(0),
                         ),
                       ),
-
-
-                      SizedBox(
-                        height: 30.h,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          // Align(
+                          //   alignment: Alignment.centerLeft,
+                          //   widthFactor: 4.5,
+                          //   child: Text(
+                          //     'Login',
+                          //     style: TextStyle(
+                          //         fontSize: 30.sp, fontWeight: FontWeight.bold),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: 30.h,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: textField(
+                              hintText: 'Email',
+                              prefixIcon: Icon(Icons.email),
+                              controller: bloc.email,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'please enter email address';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: textField(
+                              obscureText: true,
+                              hintText: 'Password',
+                              prefixIcon: Icon(Icons.lock),
+                              controller: bloc.password,
+                              validator: (value) {
+                                if (value == '') {
+                                  return 'please enter password';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            height: 40.h,
+                          ),
+                          BlocListener(
+                            bloc: bloc,
+                            listener: (context, state) {
+                              if (state is LoginSuccessState) {
+                                toast(msg: state.message);
+                                navigateTo(context,
+                                    page: Wrapper(), withHistory: false);
+                              } else if (state is LoginFailureState) {
+                                toast(msg: state.message);
+                              }
+                            },
+                            child: SizedBox(
+                              width: 343.w,
+                              height: 50.h,
+                              child: buttonWidget(
+                                onTap: () {
+                                  if (bloc.formKey.currentState!.validate()) {
+                                    bloc.add(LoginNowEvent(
+                                        email: bloc.email.text,
+                                        password: bloc.password.text));
+                                  }
+                                },
+                                text: 'Login',
+                                fontSize: 18.sp,
+                                radius: 15.0.r,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 16.h,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              navigateTo(context, page: SignUpScreen());
+                            },
+                            child: RichText(
+                                text: TextSpan(children: [
+                              TextSpan(
+                                  text: 'Don\'t have Account ? ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18.sp)),
+                              TextSpan(
+                                  text: ' Sign up',
+                                  style: TextStyle(
+                                      color: Color(0xFF4DA8CF),
+                                      fontSize: 16.sp)),
+                            ])),
+                          )
+                        ],
                       ),
-
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: textField(
-                                  hintText: 'Email',
-                                  prefixIcon: Icon(Icons.email),
-                                  controller: bloc.email,
-                                  validator: (value) {
-                                    if (value == '') {
-                                      return 'please enter email address';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20.h,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: textField(
-                                  hintText: 'Password',
-                                  prefixIcon: Icon(Icons.lock),
-                                  controller: bloc.password,
-                                  validator: (value) {
-                                    if (value == '') {
-                                      return 'please enter password';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-
-                      SizedBox(
-                        height: 40.h,
-                      ),
-            BlocListener(
-              bloc: bloc,
-              listener: (context, state) {
-                if (state is LoginSuccessState) {
-                  toast(msg: state.message);
-                  navigateTo(context, page: Wrapper(), withHistory: false);
-                } else if (state is LoginFailureState) {
-                  toast(msg: state.message);
-                }
-              },
-              child:  SizedBox(
-              width: 343.w,
-              height: 50.h,
-              child: buttonWidget(
-                onTap: () {
-                  if (bloc.formKey.currentState!.validate()) {
-                    bloc.add(LoginNowEvent(
-                        email: bloc.email.text,
-                        password: bloc.password.text));
-                  }
-                },
-                text: 'Login',
-                fontSize: 18.sp,
-                radius: 15.0.r,
-              ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            InkWell(
-              onTap: () {
-                navigateTo(context, page: SignUpScreen());
-              },
-              child: RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: 'Don\'t have Account ? ',
-                    style: TextStyle(color: Colors.black, fontSize: 18.sp)),
-                TextSpan(
-                    text: ' Sign up',
-                    style: TextStyle(color: Color(0xFF4DA8CF), fontSize: 16.sp)),
-              ])),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
-    ],
-            ),
-    ),
-    ],
-    ),
     );
-
-
   }
 }

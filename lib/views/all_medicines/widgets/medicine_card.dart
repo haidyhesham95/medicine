@@ -79,6 +79,17 @@ class MedicineCard extends StatelessWidget {
                       maxLines: 3,
                     ),
                   ),
+                  if (medicine.location !=
+                      null) // Check if location is not null
+                    SizedBox(height: 4.h),
+                  Text(
+                    'Location: ${medicine.location}',
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  Spacer(),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(

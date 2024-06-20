@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy/views/auth/widget/button.dart';
 import 'package:pharmacy/views/requests/model/request_model.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -12,15 +13,17 @@ class RequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     height: 180.h,
-      padding: EdgeInsetsDirectional.symmetric(horizontal: 10.w, ),
+      height: 200.h,
+      padding: EdgeInsetsDirectional.symmetric(
+        horizontal: 10.w,
+      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadiusDirectional.circular(16.r),
         boxShadow: const [
           BoxShadow(color: Color(0x406b6b6b), spreadRadius: 1, blurRadius: 5),
         ],
-            ),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -57,19 +60,19 @@ class RequestCard extends StatelessWidget {
 
   Padding buildDetailsColumn() {
     return Padding(
-      padding:  EdgeInsets.symmetric(vertical: 10.w, ),
+      padding: EdgeInsets.symmetric(
+        vertical: 10.w,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween, // Adjusted mainAxisAlignment
         children: [
           buildText(
             request.medicine.name,
             fontWeight: FontWeight.bold,
             fontSize: 20.sp,
           ),
-
-          SizedBox(height: 5,),
-
           buildText(
             request.medicine.description,
             fontWeight: FontWeight.bold,
@@ -78,21 +81,23 @@ class RequestCard extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             maxLines: 3,
           ),
-          SizedBox(height: 3,),
-
           buildText(
             '${request.medicine.price}',
             fontWeight: FontWeight.bold,
             fontSize: 14.sp,
             color: Colors.black45,
           ),
-          SizedBox(height: 5,),
-          buildText(
-            'Ordered by : ${request.user.name}',
-            fontWeight: FontWeight.bold,
-            fontSize: 13.sp,
-              color: Colors.black45
-
+          buildText('Ordered by : ${request.user.name}',
+              fontWeight: FontWeight.bold,
+              fontSize: 13.sp,
+              color: Colors.black45),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: SizedBox(
+              width: 100.w,
+              height: 30.h,
+              child: buttonWidget(onTap: () {}, text: 'confirm'),
+            ),
           ),
         ],
       ),
@@ -100,13 +105,13 @@ class RequestCard extends StatelessWidget {
   }
 
   Widget buildText(
-      String text, {
-        FontWeight fontWeight = FontWeight.normal,
-        double fontSize = 14.0,
-        Color color = Colors.black,
-        TextOverflow overflow = TextOverflow.visible,
-        int maxLines = 1,
-      }) {
+    String text, {
+    FontWeight fontWeight = FontWeight.normal,
+    double fontSize = 14.0,
+    Color color = Colors.black,
+    TextOverflow overflow = TextOverflow.visible,
+    int maxLines = 1,
+  }) {
     return Text(
       text,
       style: TextStyle(

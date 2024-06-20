@@ -26,9 +26,11 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
       backgroundColor: Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(
         backgroundColor: Color(0xFF4DA8CF).withOpacity(0.9),
-        title: const Text('Add Medicine',style: TextStyle(color: Colors.white,
-         // fontWeight: FontWeight.w700,
-        )),
+        title: const Text('Add Medicine',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            )),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -44,10 +46,10 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
               Container(
                 width: double.infinity,
                 height: 150,
-                decoration:  BoxDecoration(
+                decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    border: Border.all(color: Color(0xFF4DA8CF),width: 1.5),
+                    border: Border.all(color: Color(0xFF4DA8CF), width: 1.5),
                     boxShadow: [
                       BoxShadow(
                         offset: const Offset(0, 4),
@@ -55,39 +57,40 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                         spreadRadius: 0,
                         color: Colors.black.withOpacity(0.15),
                       )
-                    ]
-                ),
-
-
-                child:
-
-                InkWell(
-                    onTap: () {
-                      bloc.pickImage.imagePickerDialog(
-                        context: context,
-                        onSubmit: (file, name) {
-                          setState(() {
-                            bloc.imageFile = file;
-                            bloc.imageName = name;
-                          });
-                        },
-                      );
+                    ]),
+                child: InkWell(
+                  onTap: () {
+                    bloc.pickImage.imagePickerDialog(
+                      context: context,
+                      onSubmit: (file, name) {
+                        setState(() {
+                          bloc.imageFile = file;
+                          bloc.imageName = name;
+                        });
                       },
-                    child:bloc.imageFile == null ?Center(child: Image.asset(Assets.images.addImage.path,fit:BoxFit.cover,color: Color(0xFF4DA8CF),height: 130,width: 130,))
-
-                    : Center(child: Image.file(bloc.imageFile!,
-                        fit: BoxFit.cover)),
-
+                    );
+                  },
+                  child: bloc.imageFile == null
+                      ? Center(
+                          child: Image.asset(
+                          Assets.images.addImage.path,
+                          fit: BoxFit.cover,
+                          color: Color(0xFF4DA8CF),
+                          height: 130,
+                          width: 130,
+                        ))
+                      : Center(
+                          child:
+                              Image.file(bloc.imageFile!, fit: BoxFit.cover)),
                 ),
               ),
-
               SizedBox(
-                height: 70.h,
+                height: 50.h,
               ),
               textField(
-              hintText:   'Name',
-              controller:   bloc.name,
-              validator:   (value) {
+                hintText: 'Name',
+                controller: bloc.name,
+                validator: (value) {
                   if (value == '') {
                     return 'please enter your name';
                   }
@@ -98,9 +101,9 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-              hintText:   'Medicine Name',
-              controller:   bloc.description,
-              validator:   (value) {
+                hintText: 'Medicine Name',
+                controller: bloc.description,
+                validator: (value) {
                   if (value == '') {
                     return 'please enter description';
                   }
@@ -111,10 +114,9 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-
-               hintText: 'Your Number',
-               controller:  bloc.price,
-               validator:  (value) {
+                hintText: 'Your Number',
+                controller: bloc.price,
+                validator: (value) {
                   if (value == '') {
                     return 'please enter your number';
                   }
@@ -122,7 +124,20 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 },
               ),
               SizedBox(
-                height: 50.h,
+                height: 16.h,
+              ),
+              textField(
+                hintText: 'Your location',
+                controller: bloc.location,
+                validator: (value) {
+                  if (value == '') {
+                    return 'please enter your location';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: 25.h,
               ),
               BlocListener(
                 bloc: bloc,
@@ -134,32 +149,37 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                       bloc.name.clear();
                       bloc.price.clear();
                       bloc.description.clear();
+                      bloc.location.clear();
                     });
                     KiwiContainer()
                         .resolve<AllMedicinesBloc>()
                         .add(GetAllMedicinesEvent());
                   }
                 },
-                child:  SizedBox(
-                    width: 343.w,
-                    height: 50.h,
-                    child: buttonWidget(
-                        onTap:  () {
-                            if (bloc.formKey.currentState!.validate()) {
-                              if (bloc.imageFile == null) {
-                                toast(msg: 'choose image');
-                              } else {
-                                bloc.add(AddMedicineNowEvent(
-                                    name: bloc.name.text,
-                                    price: bloc.price.text,
-                                    description: bloc.description.text,
-                                    image: bloc.imageFile!,
-                                    imageName: bloc.imageName));
-                              }
-                            }
-                          },text: 'Save',
-                        fontSize: 18.sp,radius: 15.0.r),
-                  ),
+                child: SizedBox(
+                  width: 343.w,
+                  height: 50.h,
+                  child: buttonWidget(
+                      onTap: () {
+                        if (bloc.formKey.currentState!.validate()) {
+                          if (bloc.imageFile == null) {
+                            toast(msg: 'choose image');
+                          } else {
+                            bloc.add(AddMedicineNowEvent(
+                              name: bloc.name.text,
+                              price: bloc.price.text,
+                              description: bloc.description.text,
+                              image: bloc.imageFile!,
+                              imageName: bloc.imageName,
+                              location: bloc.location.text,
+                            ));
+                          }
+                        }
+                      },
+                      text: 'Save',
+                      fontSize: 18.sp,
+                      radius: 15.0.r),
+                ),
               )
             ],
           ),

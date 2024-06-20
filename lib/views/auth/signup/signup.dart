@@ -16,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: const Color(0xFF4DA8CF),
       body: SingleChildScrollView(
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 0),
@@ -27,24 +27,25 @@ class SignUpScreen extends StatelessWidget {
             width: MediaQuery.sizeOf(context).width,
             child: Column(
               children: [
-
-                Spacer(flex: 2,),
+                const Spacer(
+                  flex: 2,
+                ),
                 Text(
                   'Create Account',
                   style: TextStyle(
                     fontSize: 30.sp,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'courgette',
                     color: Colors.white,
                   ),
                 ),
-
-                Spacer(),
+                const Spacer(),
                 Container(
-                  height: 580.h,
+                  height: 650.h,
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 244, 250, 255),
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0),
                       topLeft: Radius.circular(70),
                       topRight: Radius.circular(70),
@@ -55,7 +56,9 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 30,),
+                      SizedBox(
+                        height: 30,
+                      ),
                       textField(
                         hintText: 'Name',
                         controller: bloc.name,
@@ -99,6 +102,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 16.h,
                       ),
                       textField(
+                        obscureText: true,
                         hintText: 'Password',
                         controller: bloc.password,
                         validator: (value) {
@@ -113,6 +117,7 @@ class SignUpScreen extends StatelessWidget {
                         height: 16.h,
                       ),
                       textField(
+                        obscureText: true,
                         hintText: 'Confirm Password',
                         controller: bloc.confirmPassword,
                         validator: (value) {
@@ -133,7 +138,8 @@ class SignUpScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (state is SignupSuccessState) {
                             toast(msg: state.message);
-                            navigateTo(context, page: Wrapper(), withHistory: false);
+                            navigateTo(context,
+                                page: Wrapper(), withHistory: false);
                           } else if (state is SignupFailureState) {
                             toast(msg: state.message);
                           }
@@ -170,11 +176,13 @@ class SignUpScreen extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: 'Have Account ? ',
-                                style: TextStyle(color: Colors.black, fontSize: 18.sp),
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 18.sp),
                               ),
                               TextSpan(
                                 text: ' Login',
-                                style: TextStyle(color: Color(0xFF4DA8CF), fontSize: 16.sp),
+                                style: TextStyle(
+                                    color: Color(0xFF4DA8CF), fontSize: 16.sp),
                               ),
                             ],
                           ),
@@ -189,6 +197,5 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
-
   }
 }
