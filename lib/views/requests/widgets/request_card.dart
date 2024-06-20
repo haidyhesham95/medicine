@@ -8,7 +8,8 @@ import 'package:skeletons/skeletons.dart';
 
 class RequestCard extends StatelessWidget {
   final RequestModel request;
-  const RequestCard({super.key, required this.request});
+  final VoidCallback func;
+  const RequestCard({super.key, required this.request, required this.func});
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +83,7 @@ class RequestCard extends StatelessWidget {
             maxLines: 3,
           ),
           buildText(
-            '${request.medicine.price}',
+            request.medicine.price,
             fontWeight: FontWeight.bold,
             fontSize: 14.sp,
             color: Colors.black45,
@@ -96,7 +97,7 @@ class RequestCard extends StatelessWidget {
             child: SizedBox(
               width: 100.w,
               height: 30.h,
-              child: buttonWidget(onTap: () {}, text: 'confirm'),
+              child: buttonWidget(onTap: func, text: 'confirm'),
             ),
           ),
         ],

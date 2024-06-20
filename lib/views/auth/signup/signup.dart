@@ -56,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       textField(
@@ -68,7 +68,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                           return null;
                         },
-                        prefixIcon: Icon(Icons.person),
+                        prefixIcon: const Icon(Icons.person),
                       ),
                       SizedBox(
                         height: 16.h,
@@ -82,7 +82,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                           return null;
                         },
-                        prefixIcon: Icon(Icons.phone),
+                        prefixIcon: const Icon(Icons.phone),
                       ),
                       SizedBox(
                         height: 16.h,
@@ -96,7 +96,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                           return null;
                         },
-                        prefixIcon: Icon(Icons.email),
+                        prefixIcon: const Icon(Icons.email),
                       ),
                       SizedBox(
                         height: 16.h,
@@ -111,7 +111,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                           return null;
                         },
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       SizedBox(
                         height: 16.h,
@@ -128,7 +128,7 @@ class SignUpScreen extends StatelessWidget {
                           }
                           return null;
                         },
-                        prefixIcon: Icon(Icons.lock),
+                        prefixIcon: const Icon(Icons.lock),
                       ),
                       SizedBox(
                         height: 30.h,
@@ -182,7 +182,8 @@ class SignUpScreen extends StatelessWidget {
                               TextSpan(
                                 text: ' Login',
                                 style: TextStyle(
-                                    color: Color(0xFF4DA8CF), fontSize: 16.sp),
+                                    color: const Color(0xFF4DA8CF),
+                                    fontSize: 16.sp),
                               ),
                             ],
                           ),

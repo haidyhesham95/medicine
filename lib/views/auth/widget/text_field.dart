@@ -14,37 +14,37 @@ TextFormField textField(
     decoration: InputDecoration(
       hintText: hintText,
       prefixIcon: prefixIcon,
-      prefixIconColor: Color(0xFF4DA8CF),
-      hintStyle: TextStyle(
+      prefixIconColor: const Color(0xFF4DA8CF),
+      hintStyle: const TextStyle(
         color: Colors.black38,
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.r),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Color(0xFF4DA8CF),
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.r),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Color(0xFF4DA8CF),
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.r),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Color(0xFF4DA8CF),
         ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.r),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Colors.red,
         ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.r),
-        borderSide: BorderSide(
+        borderSide: const BorderSide(
           color: Colors.red,
         ),
       ),

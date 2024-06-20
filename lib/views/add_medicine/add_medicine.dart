@@ -23,9 +23,9 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 244, 250, 255),
+      backgroundColor: const Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4DA8CF).withOpacity(0.9),
+        backgroundColor: const Color(0xFF4DA8CF).withOpacity(0.9),
         title: const Text('Add Medicine',
             style: TextStyle(
               color: Colors.white,
@@ -34,14 +34,14 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsetsDirectional.symmetric(horizontal: 16),
+        padding: const EdgeInsetsDirectional.symmetric(horizontal: 16),
         child: Form(
           key: bloc.formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 40.h,
+                height: 20.h,
               ),
               Container(
                 width: double.infinity,
@@ -49,7 +49,8 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
-                    border: Border.all(color: Color(0xFF4DA8CF), width: 1.5),
+                    border:
+                        Border.all(color: const Color(0xFF4DA8CF), width: 1.5),
                     boxShadow: [
                       BoxShadow(
                         offset: const Offset(0, 4),
@@ -75,7 +76,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                           child: Image.asset(
                           Assets.images.addImage.path,
                           fit: BoxFit.cover,
-                          color: Color(0xFF4DA8CF),
+                          color: const Color(0xFF4DA8CF),
                           height: 130,
                           width: 130,
                         ))

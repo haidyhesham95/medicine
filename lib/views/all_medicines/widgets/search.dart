@@ -34,7 +34,7 @@ class Search extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: Icon(
+      icon: const Icon(
         Icons.arrow_back,
         color: Color(0xFF4DA8CF),
       ),
@@ -67,7 +67,7 @@ class Search extends SearchDelegate {
                 child: Text(
                   'No medicine found.',
                   style: TextStyle(
-                      color: Color(0xFF4DA8CF),
+                      color: const Color(0xFF4DA8CF),
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold),
                 ),
@@ -103,7 +103,7 @@ class Search extends SearchDelegate {
               child: Text(state.message),
             );
           } else {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Color(0xFF4DA8CF),
               ),

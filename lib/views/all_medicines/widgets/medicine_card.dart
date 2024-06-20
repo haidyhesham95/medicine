@@ -89,7 +89,7 @@ class MedicineCard extends StatelessWidget {
                       color: Colors.black87,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(

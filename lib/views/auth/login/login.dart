@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: textField(
                               hintText: 'Email',
-                              prefixIcon: Icon(Icons.email),
+                              prefixIcon: const Icon(Icons.email),
                               controller: bloc.email,
                               validator: (value) {
                                 if (value == '') {
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: textField(
                               obscureText: true,
                               hintText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
+                              prefixIcon: const Icon(Icons.lock),
                               controller: bloc.password,
                               validator: (value) {
                                 if (value == '') {
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               TextSpan(
                                   text: ' Sign up',
                                   style: TextStyle(
-                                      color: Color(0xFF4DA8CF),
+                                      color: const Color(0xFF4DA8CF),
                                       fontSize: 16.sp)),
                             ])),
                           )

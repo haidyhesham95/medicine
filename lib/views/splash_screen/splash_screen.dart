@@ -33,7 +33,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
   }
 
   _navigateToHome() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginScreen()),
@@ -43,7 +43,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 244, 250, 255),
+      backgroundColor: const Color.fromARGB(255, 244, 250, 255),
       body: FadeTransition(
         opacity: _animation!,
         child: Center(
@@ -51,7 +51,7 @@ class _AnimatedSplashScreenState extends State<AnimatedSplashScreen>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/curae-02.png'),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
             ],
           ),
         ),

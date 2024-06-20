@@ -21,15 +21,15 @@ class AllMedicinesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 244, 250, 255),
+      backgroundColor: const Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(
-        backgroundColor: Color(0xFF4DA8CF).withOpacity(0.9),
+        backgroundColor: const Color(0xFF4DA8CF).withOpacity(0.9),
         actions: [
           IconButton(
             onPressed: () {
               showSearch(context: context, delegate: Search());
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
               color: Colors.white,
               size: 25,
