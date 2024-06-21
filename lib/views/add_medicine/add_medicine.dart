@@ -154,7 +154,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                     });
                     KiwiContainer()
                         .resolve<AllMedicinesBloc>()
-                        .add(GetAllMedicinesEvent());
+                        .add(GetAllMedicinesEvent(context));
                   }
                 },
                 child: SizedBox(

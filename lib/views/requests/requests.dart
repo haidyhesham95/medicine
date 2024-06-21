@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:pharmacy/lang/widget/app_local.dart';
 import 'package:pharmacy/views/add_medicine/bloc/add_medicine_bloc.dart';
 import 'package:pharmacy/views/requests/bloc/request_bloc.dart';
 import 'package:pharmacy/views/requests/model/request_model.dart';
@@ -24,8 +25,8 @@ class _RequestsScreenState extends State<RequestsScreen> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(
-        backgroundColor: const Color(0xFF4E97C5).withOpacity(0.9),
-        title: const Text('All requests',
+        backgroundColor: const Color(0xFF4DA8CF).withOpacity(0.9),
+        title: Text(getLang(context, 'All requests') ,
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -34,6 +35,7 @@ class _RequestsScreenState extends State<RequestsScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
               height: 30.h,

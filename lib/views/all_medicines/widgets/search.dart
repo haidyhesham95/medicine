@@ -9,9 +9,10 @@ import 'package:pharmacy/views/all_medicines/widgets/medicine_card.dart';
 import 'package:pharmacy/views/requests/bloc/request_bloc.dart';
 
 class Search extends SearchDelegate {
-  final AllMedicinesBloc bloc = KiwiContainer().resolve<AllMedicinesBloc>()
-    ..add(GetAllMedicinesEvent());
-  final RequestBloc bloc2 = KiwiContainer().resolve<RequestBloc>();
+  // final AllMedicinesBloc bloc = KiwiContainer().resolve<AllMedicinesBloc>()
+  //   ..add(GetAllMedicinesEvent());
+  // final RequestBloc bloc2 = KiwiContainer().resolve<RequestBloc>();
+
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -48,6 +49,9 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    final AllMedicinesBloc bloc = KiwiContainer().resolve<AllMedicinesBloc>()
+      ..add(GetAllMedicinesEvent(context));
+    final RequestBloc bloc2 = KiwiContainer().resolve<RequestBloc>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: BlocBuilder(

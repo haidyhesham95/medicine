@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy/lang/widget/app_local.dart';
 import 'package:pharmacy/views/all_medicines/model/medicine_model.dart';
 import 'package:pharmacy/views/auth/widget/button.dart';
 import 'package:skeletons/skeletons.dart';
@@ -13,8 +14,9 @@ class MedicineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: 170.h,
+      height: size.height * 0.30,
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -66,36 +68,35 @@ class MedicineCard extends StatelessWidget {
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 8.h),
-                  Expanded(
-                    child: Text(
-                      medicine.description,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14.sp,
-                        color: Colors.black45,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
+                  SizedBox(height: 4.h),
+                  Text(
+                    medicine.description,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14.sp,
+                      color: Colors.black45,
                     ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
                   ),
-                  if (medicine.location !=
-                      null) // Check if location is not null
+                  if (medicine.location !=null) // Check if location is not null
                     SizedBox(height: 4.h),
                   Text(
-                    'Location: ${medicine.location}',
+                    getLang(context, 'Location') + ' : ${medicine.location}',
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.black87,
                     ),
                   ),
+                  SizedBox(height: 4.h),
+
                   const Spacer(),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: SizedBox(
                       width: 100.w,
                       height: 30.h,
-                      child: buttonWidget(onTap: onTap, text: 'Request'),
+                      child: buttonWidget(onTap: onTap, text: getLang(context, 'Request')),
                     ),
                   ),
                 ],

@@ -1,0 +1,20 @@
+{
+"EN": "ar",
+  "Home": "الرئسيه",
+
+"Profile": "الملف الشخصي",
+
+  "Language": "اللغه",
+  "Change Language": "تغير اللغه",
+  "Logout": "تسجيل الخروج",
+  "Are you sure you want to logout?": "هل انت متأكد انك تريد تسجيل الخروج؟",
+  "Yes": "نعم",
+  "Cancel": "الغاء",
+
+  "Location": "الموقع",
+  "Request": "طلب",
+  "Ordered by": "تم الطلب بواسطه",
+  "confirm": "تأكيد",
+  "All requests": "جميع الطلبات",
+  "All Medicines": "جميع الادويه"
+}

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pharmacy/lang/widget/app_local.dart';
 import 'package:pharmacy/views/auth/widget/button.dart';
 import 'package:pharmacy/views/requests/model/request_model.dart';
 import 'package:skeletons/skeletons.dart';
@@ -13,8 +14,9 @@ class RequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      height: 200.h,
+      height: size.height * 0.35,
       padding: EdgeInsetsDirectional.symmetric(
         horizontal: 10.w,
       ),
@@ -28,18 +30,19 @@ class RequestCard extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          buildImage(),
+          buildImage(context),
           SizedBox(width: 20.w),
-          Expanded(child: buildDetailsColumn()),
+          Expanded(child: buildDetailsColumn(context)),
         ],
       ),
     );
   }
 
-  Widget buildImage() {
+  Widget buildImage(context) {
+    final size = MediaQuery.of(context).size;
     return SizedBox(
-      width: 120.w,
-      height: 140.h,
+      width: size.width * 0.3,
+      height: size.height * 0.3,
       child: ClipRRect(
         borderRadius: BorderRadiusDirectional.circular(16.r),
         child: CachedNetworkImage(
@@ -59,7 +62,7 @@ class RequestCard extends StatelessWidget {
     );
   }
 
-  Padding buildDetailsColumn() {
+  Padding buildDetailsColumn(context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: 10.w,
@@ -88,18 +91,21 @@ class RequestCard extends StatelessWidget {
             fontSize: 14.sp,
             color: Colors.black45,
           ),
-          buildText('Ordered by : ${request.user.name}',
+
+          buildText(getLang(context, 'Ordered by') + ' : ${request.user.name}',
               fontWeight: FontWeight.bold,
               fontSize: 13.sp,
               color: Colors.black45),
+
           Align(
             alignment: Alignment.bottomRight,
             child: SizedBox(
               width: 100.w,
               height: 30.h,
-              child: buttonWidget(onTap: func, text: 'confirm'),
+              child: buttonWidget(onTap: func,text:  getLang(context, 'confirm'),
             ),
           ),
+          )
         ],
       ),
     );

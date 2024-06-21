@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../auth/login/login.dart';
 
 class DropMenuWidget extends StatelessWidget {
   const DropMenuWidget({super.key});
@@ -21,8 +24,12 @@ class DropMenuWidget extends StatelessWidget {
               leading: const Icon(Icons.logout, color: Color(0xFF4E97C5)),
               title: const Text('LogOut',
                   style: TextStyle(fontSize: 16, color: Color(0xFF4E97C5))),
-              onTap: () {
-                Navigator.of(context).pop();
+              // onTap: () {
+              //   Navigator.of(context).pop();
+              // },
+              onTap:(){
+                FirebaseAuth.instance.signOut();
+                Navigator.push(context, MaterialPageRoute(builder:( BuildContext context)=>  LoginScreen(),));
               },
             ),
           ),
