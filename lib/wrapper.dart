@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
+import 'package:pharmacy/lang/widget/app_local.dart';
 import 'package:pharmacy/views/add_medicine/add_medicine.dart';
 import 'package:pharmacy/views/all_medicines/all_medicines.dart';
 import 'package:pharmacy/views/requests/requests.dart';
@@ -50,7 +51,7 @@ class _WrapperState extends State<Wrapper> {
                   // ignore: deprecated_member_use
                   color: const Color(0xFF4DA8CF),
                 ),
-                label: titles[index])),
+                label:getLang(context, titles[index])) ),
         currentIndex: widget.currentIndex,
         onTap: (value) {
           setState(() {
