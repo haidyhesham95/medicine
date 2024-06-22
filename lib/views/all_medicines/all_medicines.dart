@@ -129,7 +129,7 @@ class AllMedicinesScreen extends StatelessWidget {
                         listener: (context, state) {
                           if (state is RequestMedicineSuccessState) {
                             toast(msg: state.message);
-                            bloc2.add(GetAllRequestsEvent());
+                            bloc2.add(GetAllRequestsEvent(context));
                           } else if (state is RequestMedicineFailureState) {
                             toast(msg: state.message);
                           }

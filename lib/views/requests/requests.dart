@@ -16,12 +16,13 @@ class RequestsScreen extends StatefulWidget {
 }
 
 class _RequestsScreenState extends State<RequestsScreen> {
-  final bloc = KiwiContainer().resolve<RequestBloc>()
-    ..add(GetAllRequestsEvent());
-  final bloctwo = KiwiContainer().resolve<AddMedicineBloc>();
+
 
   @override
   Widget build(BuildContext context) {
+    final bloc = KiwiContainer().resolve<RequestBloc>()
+      ..add(GetAllRequestsEvent(context));
+    final bloctwo = KiwiContainer().resolve<AddMedicineBloc>();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(

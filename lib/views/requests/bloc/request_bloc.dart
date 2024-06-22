@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pharmacy/views/all_medicines/model/medicine_model.dart';
 import 'package:pharmacy/views/requests/model/request_model.dart';
+
+import '../../../core/translate.dart';
+import '../../../lang/manager/lang_cubit.dart';
 
 part 'request_event.dart';
 part 'request_state.dart';
@@ -12,12 +17,23 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
   final ins = FirebaseFirestore.instance;
 
   RequestBloc() : super(RequestInitial()) {
-    on<GetAllRequestsEvent>(getAllRequests);
+
+
+    on<GetAllRequestsEvent>((event, emit) => getAllRequests(event, emit, event.context));
+
     on<RequestMedicineEvent>(requestMedicine);
     on<DeleteRequestMedicineEvent>(deleterequestMedicine);
   }
-  FutureOr<void> requestMedicine(
-      RequestMedicineEvent event, Emitter<RequestState> emit) async {
+
+
+  Future<String> mockTranslate(String text) async {
+    await Future.delayed(Duration(milliseconds: 50));
+    return Translate.translate(text);
+  }
+
+
+  FutureOr<void> requestMedicine(RequestMedicineEvent event,
+      Emitter<RequestState> emit) async {
     try {
       emit(RequestMedicineLoadingState());
       ins
@@ -29,8 +45,8 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     }
   }
 
-  FutureOr<void> deleterequestMedicine(
-      DeleteRequestMedicineEvent event, Emitter<RequestState> emit) async {
+  FutureOr<void> deleterequestMedicine(DeleteRequestMedicineEvent event,
+      Emitter<RequestState> emit) async {
     try {
       ins.collection('requests').doc(event.requestid).delete();
       // emit(RequestMedicineSuccessState(message: 'Request Sent successfully'));
@@ -38,15 +54,14 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
   }
 
   FutureOr<void> getAllRequests(
-      GetAllRequestsEvent event, Emitter<RequestState> emit) async {
+      GetAllRequestsEvent event, Emitter<RequestState> emit, BuildContext context) async {
     try {
       emit(GetAllRequestsLoadingState());
       final requests = await ins.collection('requests').get();
       List<RequestModel> request = [];
       for (int i = 0; i < requests.docs.length; i++) {
-        final user = await getUser(requests.docs[i].data()['userId']);
-        final medicine =
-            await getMedicine(requests.docs[i].data()['medicineId']);
+        final user = await getUserWithTranslation(requests.docs[i].data()['userId'],event.context);
+        final medicine = await getMedicineWithTranslation(requests.docs[i].data()['medicineId'],event.context);
         request.add(RequestModel(
             medicine: medicine, user: user, id: requests.docs[i].id));
       }
@@ -56,14 +71,25 @@ class RequestBloc extends Bloc<RequestEvent, RequestState> {
     }
   }
 
-  FutureOr<MedicineModel> getMedicine(String medicineId) async {
+  FutureOr<MedicineModel> getMedicineWithTranslation(String medicineId,context) async {
     final data = await ins.collection('medicines').doc(medicineId).get();
-    return MedicineModel.fromJson(data.data(), medicineId);
+    Map<String, dynamic> medicineMap = data.data()!;
+    if (LangCubit.get(context).appLocale != const Locale('en')) {
+      medicineMap['name'] = await mockTranslate(medicineMap['name']);
+      medicineMap['description'] = await mockTranslate(medicineMap['description']);
+      // Translate other fields if needed
+    }
+    return MedicineModel.fromJson(medicineMap, medicineId);
   }
 
-  FutureOr<UserModel> getUser(String userId) async {
-    final data =
-        await ins.collection('Users').where('uid', isEqualTo: userId).get();
-    return UserModel.fromJson(data.docs[0].data());
+  FutureOr<UserModel> getUserWithTranslation(String userId,context) async {
+    final data = await ins.collection('Users').where('uid', isEqualTo: userId).get();
+    Map<String, dynamic> userMap = data.docs[0].data();
+    if (LangCubit.get(context).appLocale != const Locale('en')) {
+      userMap['name'] = await mockTranslate(userMap['name']);
+      // Translate other fields if needed
+    }
+    return UserModel.fromJson(userMap);
   }
+
 }
