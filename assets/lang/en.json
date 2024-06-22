@@ -17,7 +17,16 @@
   "All requests": "All requests",
   "Medicines": "Medicines",
   "Add": "Add",
-  "Requests": "Requests"
+  "Requests": "Requests",
+  "Add Medicine": "Add Medicine",
+  "Name": "Name",
+  "please enter your name": "please enter your name",
+  "Medicine Name": "Medicine Name",
+  "Your Number": "Your Number",
+    "please enter your number": "please enter your number",
+  "Your Location": "Your Location",
+  "please enter your location": "please enter your location",
+  "Save": "Save"
 
 
 

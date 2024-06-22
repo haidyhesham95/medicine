@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:pharmacy/core/helper_methods.dart';
 import 'package:pharmacy/gen/assets.gen.dart';
+import 'package:pharmacy/lang/widget/app_local.dart';
 import 'package:pharmacy/views/add_medicine/bloc/add_medicine_bloc.dart';
 import 'package:pharmacy/views/all_medicines/bloc/all_medicines_bloc.dart';
 import 'package:pharmacy/views/auth/widget/button.dart';
@@ -26,7 +27,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
       backgroundColor: const Color.fromARGB(255, 244, 250, 255),
       appBar: AppBar(
         backgroundColor: const Color(0xFF4DA8CF).withOpacity(0.9),
-        title: const Text('Add Medicine',
+        title:  Text(getLang(context, 'Add Medicine'),
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -89,11 +90,11 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 50.h,
               ),
               textField(
-                hintText: 'Name',
+                hintText: getLang(context, 'Name'),
                 controller: bloc.name,
                 validator: (value) {
                   if (value == '') {
-                    return 'please enter your name';
+                    return getLang(context, 'please enter your name') ;
                   }
                   return null;
                 },
@@ -102,11 +103,11 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-                hintText: 'Medicine Name',
+                hintText:getLang(context, 'Medicine Name') ,
                 controller: bloc.description,
                 validator: (value) {
                   if (value == '') {
-                    return 'please enter description';
+                    return getLang(context, 'please enter description');
                   }
                   return null;
                 },
@@ -115,11 +116,11 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-                hintText: 'Your Number',
+                hintText: getLang(context, 'Your Number'),
                 controller: bloc.price,
                 validator: (value) {
                   if (value == '') {
-                    return 'please enter your number';
+                    return getLang(context, 'please enter your number');
                   }
                   return null;
                 },
@@ -128,11 +129,11 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                 height: 16.h,
               ),
               textField(
-                hintText: 'Your location',
+                hintText: getLang(context, 'Your Location'),
                 controller: bloc.location,
                 validator: (value) {
                   if (value == '') {
-                    return 'please enter your location';
+                    return getLang(context, 'please enter your location');
                   }
                   return null;
                 },
@@ -177,7 +178,7 @@ class _AddMedicineScreensState extends State<AddMedicineScreens> {
                           }
                         }
                       },
-                      text: 'Save',
+                      text: getLang(context, 'Save'),
                       fontSize: 18.sp,
                       radius: 15.0.r),
                 ),

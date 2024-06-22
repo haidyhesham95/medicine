@@ -19,5 +19,14 @@
   "All Medicines": "جميع الادويه",
   "Medicines": "الادويه",
   "Add": "اضافة",
-  "Requests": "الطلبات"
+  "Requests": "الطلبات",
+  "Add Medicine": "اضافة دواء",
+    "Name": "الاسم",
+  "please enter your name": "من فضلك ادخل اسمك",
+  "Medicine Name": "اسم الدواء",
+  "Your Number": "رقمك",
+  "please enter your number": "من فضلك ادخل رقمك",
+  "Your Location": "موقعك",
+  "please enter your location": "من فضلك ادخل موقعك",
+  "Save": "حفظ"
 }
